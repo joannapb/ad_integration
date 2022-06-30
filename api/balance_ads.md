@@ -5,7 +5,8 @@ A medida que os anúncios são publicados, o limite disponível em seu plano con
 ---
 ## Requisição de consulta de saldo e limite
 
-A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance e o método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como `Authorization: Bearer [access_token]`.
+A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance, método `GET`. 
+Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`. Para obter o `access_token` veja a documentação [Autenticação na API olx.com.br](oauth.md)
 </br></br>
 
 ## Retorno de sucesso esperado 
@@ -40,18 +41,22 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 ## Exemplos de retorno
 </br>
+
 ### Para um plano com limite de 20 anúncios sem nenhum anúncio ter sido inserido:
 
 * Request 
-    ```
-    GET https://apps.olx.com.br/autoupload/balance
-    Authorizarion: Bearer [access_token]
+    ```sh
+    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
-* Reponse
+* Response
 
-    `STATUS CODE 200`
     ```json
+    HTTP/1.1 200 OK
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-store
+    Pragma: no-cache
+
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
@@ -66,15 +71,18 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ### Para um plano com limite de 20 anúncios com 5 anúncios inseridos:
 
 * Request
-    ```
-    GET https://apps.olx.com.br/autoupload/balance
-    Authorizarion: Bearer [access_token]
+    ```sh
+    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
-* Reponse
+* Response
 
-    `STATUS CODE 200`
     ```json
+    HTTP/1.1 200 OK
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-store
+    Pragma: no-cache
+
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
@@ -89,15 +97,18 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ### Para uma requisição com `access_token` inválido:
 
 * Request
-    ```
-    GET https://apps.olx.com.br/autoupload/balance
-    Authorizarion: Bearer [access_token]
+    ```sh
+    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
-* Reponse
+* Response
 
-    `STATUS CODE 401`
     ```json
+    HTTP/1.1 401 
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-store
+    Pragma: no-cache
+
     {
         "reason": "ACCESS_DENIED", 
         "message": "Check the client authentication token."
@@ -107,15 +118,18 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ### Para um anunciante que não possui plano profissional ativo:
 
 * Request
-    ```
-    GET https://apps.olx.com.br/autoupload/balance
-    Authorizarion: Bearer [access_token]
+    ```sh
+    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
 * Reponse
 
-    `STATUS CODE 410`
     ```json
+    HTTP/1.1 410
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-store
+    Pragma: no-cache
+
     {
         "reason": "PRODUCT_NOT_FOUND_BY_ACCOUNT", 
         "message": "Plan does not control limits."
