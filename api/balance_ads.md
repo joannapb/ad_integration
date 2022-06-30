@@ -50,8 +50,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Reponse
 
+    `STATUS CODE 200`
     ```json
-    HTTP CODE 200
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
@@ -73,8 +73,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Reponse
 
+    `STATUS CODE 200`
     ```json
-    HTTP CODE 200
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
@@ -96,8 +96,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Reponse
 
+    `STATUS CODE 401`
     ```json
-    HTTP CODE 401
     {
         "reason": "ACCESS_DENIED", 
         "message": "Check the client authentication token."
@@ -114,8 +114,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Reponse
 
+    `STATUS CODE 410`
     ```json
-    HTTP CODE 401
     {
         "reason": "PRODUCT_NOT_FOUND_BY_ACCOUNT", 
         "message": "Plan does not control limits."
