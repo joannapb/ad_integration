@@ -5,9 +5,10 @@ A medida que os anúncios são publicados, o limite disponível em seu plano con
 ---
 ## Requisição de consulta de saldo e limite
 
-A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance, método `GET`. 
-Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`. Para obter o `access_token` veja a documentação [Autenticação na API olx.com.br](oauth.md)
-</br></br>
+A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance, método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`.
+
+> O campo `access_token` pode ser obtido seguindo a documentação [Autenticação na API olx.com.br](oauth.md).
+
 
 ## Retorno de sucesso esperado 
 
@@ -27,6 +28,7 @@ Se o anunciante possui um plano profissional ativo, a consulta retorna um `statu
 ## Retorno de erro esperado
 
 Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a consulta retorna um `status code > 200` e um JSON com o motivo e a mensagem do erro.
+</br>
 
 ## Códigos e motivos de erros da requisição retornados
 
@@ -42,9 +44,10 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ## Exemplos de retorno
 </br>
 
-### Para um plano com limite de 20 anúncios sem nenhum anúncio ter sido inserido:
+> Para um plano com limite de 20 anúncios sem nenhum anúncio ter sido inserido:
 
 * Request 
+
     ```sh
     curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
@@ -68,7 +71,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     }
     ```
 ---
-### Para um plano com limite de 20 anúncios com 5 anúncios inseridos:
+> Para um plano com limite de 20 anúncios com 5 anúncios inseridos:
 
 * Request
     ```sh
@@ -94,7 +97,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     }
     ```
 ---
-### Para uma requisição com `access_token` inválido:
+> Para uma requisição com `access_token` inválido:
 
 * Request
     ```sh
@@ -115,7 +118,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     }
     ```
 ---
-### Para um anunciante que não possui plano profissional ativo:
+> Para um anunciante que não possui plano profissional ativo:
 
 * Request
     ```sh
