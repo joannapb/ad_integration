@@ -1,0 +1,123 @@
+# Consulta Saldos e Limites de Anúncios
+
+A medida que os anúncios são publicados, o limite disponível em seu plano contratado é consumido. A API abaixo disponibiliza informações para acompanhamento do limite de inserção do plano, a quantidade de inserções que já foram realizadas, o saldo disponível para inserções de novos anúncios, a data da última renovação do plano e a data que a próxima renovação do plano ocorrerá.
+
+---
+## Requisição de consulta de saldo e limite
+
+A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance e o método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como `Authorization: Bearer [access_token]`.
+</br></br>
+
+## Retorno de sucesso esperado 
+
+Se o anunciante possui um plano profissional ativo, a consulta retorna um `status code 200` e um JSON no corpo da resposta com a estrutura: 
+
+| Parâmetro | Valores | Obrigatório | Descrição  |
+|-----------|---------|-------------|------------|
+| `id` | `string` | sim | Identificador único do plano profissinal | 
+| `name` | `string` | sim | Nome do plano profissional | 
+| `performed` | `integer` | sim | Inserções de anúncios já realizadas |
+| `available` | `integer` | sim | Saldo disponível para a inserção de anúncios  |
+| `total` | `integer` | sim | Limite de inserções de anúncios do plano profissional  |
+| `last_renew_date` | `string (ISO Datetime)` | sim | Data da última renovação de saldo de anúncios |
+| `next_renew_date` | `string (ISO Datetime)` | sim | Data da próxima renovação de saldo de anúncios |
+</br>
+
+## Retorno de erro esperado
+
+Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a consulta retorna um `status code > 200` e um JSON com o motivo e a mensagem do erro.
+
+## Códigos e motivos de erros da requisição retornados
+
+| <p align="center">Status Code</p> | Descrição | Motivo | Mensagem |
+|--------|-----------|----------------|----------|
+| <p align="center">`400`</p> | Falta campo de `authorization` no header da requisição | BAD_REQUEST | Check the header field(s) |
+| <p align="center">`401`</p> | Token inválido | ACCESS_DENIED | Check the client authentication token |
+| <p align="center">`410`</p> | Cliente não possui planos com limites | PRODUCT_NOT_FOUND_BY_ACCOUNT | Plan does not control limits |
+| <p align="center">`429`</p> | Rate Limit configurado quando o cliente fazer mais requisições por segundo do que deveria | RATE_LIMIT | You have exceeded the X requests in X seconds limit! |
+| <p align="center">`500`</p> | Erro interno inesperado | UNEXPECTED_INTERNAL_ERROR | Unexpected internal error. Try again later |
+</br>
+
+## Exemplos de retorno
+</br>
+### Para um plano com limite de 20 anúncios sem nenhum anúncio ter sido inserido:
+
+* Request 
+    ```
+    GET https://apps.olx.com.br/autoupload/balance
+    Authorizarion: Bearer [access_token]
+    ```
+
+* Reponse
+
+    ```json
+    HTTP CODE 200
+    {
+        "id": "cc07f89f5f9b691a4bc24d98614e54df",
+        "name": "Plano Profissional - Carros 20",
+        "performed": 0,
+        "available": 20,
+        "total": 20,
+        "last_renew_date": "2022-06-30T16:36:32.069324",
+        "next_renew_date": "2022-07-29T16:36:32.069324"
+    }
+    ```
+---
+### Para um plano com limite de 20 anúncios com 5 anúncios inseridos:
+
+* Request
+    ```
+    GET https://apps.olx.com.br/autoupload/balance
+    Authorizarion: Bearer [access_token]
+    ```
+
+* Reponse
+
+    ```json
+    HTTP CODE 200
+    {
+        "id": "cc07f89f5f9b691a4bc24d98614e54df",
+        "name": "Plano Profissional - Carros 20",
+        "performed": 5,
+        "available": 15,
+        "total": 20,
+        "last_renew_date": "2022-06-30T16:36:32.069324",
+        "next_renew_date": "2022-07-29T16:36:32.069324"
+    }
+    ```
+---
+### Para uma requisição com `access_token` inválido:
+
+* Request
+    ```
+    GET https://apps.olx.com.br/autoupload/balance
+    Authorizarion: Bearer [access_token]
+    ```
+
+* Reponse
+
+    ```json
+    HTTP CODE 401
+    {
+        "reason": "ACCESS_DENIED", 
+        "message": "Check the client authentication token."
+    }
+    ```
+---
+### Para um anunciante que não possui plano profissional ativo:
+
+* Request
+    ```
+    GET https://apps.olx.com.br/autoupload/balance
+    Authorizarion: Bearer [access_token]
+    ```
+
+* Reponse
+
+    ```json
+    HTTP CODE 401
+    {
+        "reason": "PRODUCT_NOT_FOUND_BY_ACCOUNT", 
+        "message": "Plan does not control limits."
+    }
+    ```
