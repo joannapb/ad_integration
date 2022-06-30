@@ -9,7 +9,7 @@ A API de Importação de Anúncios da OLX contempla as seguintes funcionalidades
 | [Status de Publicação](publishing_status.md)  | Informa o anunciante/integrador sobre o sucesso da publicação de um anúncio, bem como o motivo de uma não-publicação. | Disponível |
 | [Marcas/Modelos de Carros/Motos](autos/car_models.md)             | Disponibiliza o catálogo de marcas e modelos de carros e motos que podem ser publicados na OLX                                | Disponível            |
 | [Anúncios Publicados](published_ads.md)       | Lista todos os anúncios publicados, para o anunciante ter controle de quais anúncios estão disponívels na OLX no momento.                         | Disponível      |
-| [Consumo Saldos e Limites de Anúncios](balance_ads.md)       | Consulta saldo e limite de anúncios | Disponível      |
+| [Consumo Saldos e Limites de Anúncios](balance_ads.md)       | Consulta saldo e limite de anúncios do plano profissional | Disponível      |
 
 # Nova API de Importação de Anúncios
 
