@@ -49,7 +49,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 * Request 
 
     ```sh
-    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
 * Response
@@ -75,7 +75,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Request
     ```sh
-    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
 * Response
@@ -101,7 +101,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Request
     ```sh
-    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
 * Response
@@ -122,7 +122,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 
 * Request
     ```sh
-    curl -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
     ```
 
 * Reponse
