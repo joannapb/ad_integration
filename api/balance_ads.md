@@ -1,11 +1,11 @@
 # Consulta Saldos e Limites de Anúncios
 
-A medida que os anúncios são publicados, o limite disponível em seu plano contratado é consumido. A API abaixo disponibiliza informações para acompanhamento do limite de inserção do plano, a quantidade de inserções que já foram realizadas, o saldo disponível para inserções de novos anúncios, a data da última renovação do plano e a data que a próxima renovação do plano ocorrerá.
+A medida que os anúncios são publicados, o limite disponível em seu plano contratado é consumido. A API abaixo disponibiliza informações para acompanhamento do limite de inserção de um plano, a quantidade de inserções que já foram realizadas, o saldo disponível para inserções de novos anúncios, a data da última renovação do plano e a data que a próxima renovação do plano ocorrerá.
 
 ---
 ## Requisição de consulta de saldo e limite
 
-A URL usada para fazer a requisição do arquivo JSON: https://apps.olx.com.br/autoupload/balance, método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`.
+A URL usada para fazer a requisição do arquivo JSON é https://apps.olx.com.br/autoupload/balance, método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`.
 
 > O campo `access_token` pode ser obtido seguindo a documentação [Autenticação na API olx.com.br](oauth.md).
 
@@ -17,7 +17,7 @@ Se o anunciante possui um plano profissional ativo, a consulta retorna um `statu
 | Parâmetro | Valores | Obrigatório | Descrição  |
 |-----------|---------|-------------|------------|
 | `id` | `string` | sim | Identificador único do plano profissinal | 
-| `name` | `string` | sim | Nome do plano profissional | 
+| `name` | `string` | sim | Descrição do plano profissional | 
 | `performed` | `integer` | sim | Inserções de anúncios já realizadas |
 | `available` | `integer` | sim | Saldo disponível para a inserção de anúncios  |
 | `total` | `integer` | sim | Limite de inserções de anúncios do plano profissional  |
@@ -44,7 +44,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ## Exemplos de retorno
 </br>
 
-> Para um plano com limite de 20 anúncios sem nenhum anúncio ter sido inserido:
+> Para um plano com limite de 20 inserções de anúncios no qual nenhum anúncio foi inserido:
 
 * Request 
 
@@ -71,7 +71,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     }
     ```
 ---
-> Para um plano com limite de 20 anúncios com 5 anúncios inseridos:
+> Para um plano com limite de 20 inserções de anúncios no qual 5 anúncios foram inseridos:
 
 * Request
     ```sh
