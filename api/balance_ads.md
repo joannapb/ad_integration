@@ -21,8 +21,8 @@ Se o anunciante possui um plano profissional ativo, a consulta retorna um `statu
 | `performed` | `integer` | sim | Inserções de anúncios já realizadas |
 | `available` | `integer` | sim | Saldo disponível para a inserção de anúncios  |
 | `total` | `integer` | sim | Limite de inserções de anúncios do plano profissional  |
-| `last_renew_date` | `string (ISO Datetime)` | sim | Data da última renovação de saldo de anúncios. <br><span style="color: #58a6ff">*Observe que esta data e hora estão no Time Zone Zulu. Para determinar o horário de Brasília, decremente três horas</span>* |
-| `next_renew_date` | `string (ISO Datetime)` | sim | Data da próxima renovação de saldo de anúncios. <br><span style="color: #58a6ff">*Observe que esta data e hora estão no Time Zone Zulu. Para determinar o horário de Brasília, decremente três horas</span>* |
+| `last_renew_date` | `string (ISO Datetime)` | sim | Data da última renovação de saldo de anúncios. <br><span style="color: #58a6ff">*Observe que esta data e hora estão no Time Zone Zulu. Para horário de Brasília, decremente três horas.</span>* |
+| `next_renew_date` | `string (ISO Datetime)` | sim | Data da próxima renovação de saldo de anúncios. <br><span style="color: #58a6ff">*Observe que esta data e hora estão no Time Zone Zulu. Para horário de Brasília, decremente três horas.</span>* |
 </br>
 
 ## Retorno de erro esperado
