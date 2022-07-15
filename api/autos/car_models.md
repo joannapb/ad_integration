@@ -18,7 +18,17 @@ Nosso servidor deve receber a requisição com método do tipo `POST`, sendo 
 
 ### Marcas de Carros Disponíveis
 
-Exemplo de chamada para https://apps.olx.com.br/autoupload/car_info:
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/car_info:
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/car_info' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
@@ -51,11 +61,21 @@ Exemplo de retorno:
 
 ### Modelos de Carros de Determinada Marca
 
-Exemplo de chamada: https://apps.olx.com.br/autoupload/car_info/6 (no caso, o id `6` é a marca `AUDI`, conforme visto no exemplo acima):
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/car_info/6 (no caso, o id `6` é a marca `AUDI`, conforme visto no exemplo acima):
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/car_info/6' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
-    "access_token": "2cb68a524c25b9a934e9edf4102ef82db5babd77"
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
 }
 ```
 
@@ -80,11 +100,21 @@ Exemplo de retorno:
 
 ### Versões de Modelo de Carro de Marca Determinada
 
-Exemplo de chamada para: https://apps.olx.com.br/autoupload/car_info/6/3 (no caso, o id `6` identifica a marca `AUDI e o id `3` identifica o modelo `A3`, conforme exemplos acima):
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/car_info/6/3 (no caso, o id `6` identifica a marca `AUDI` e o id `3` identifica o modelo `A3`, conforme exemplos acima):
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/car_info/6/3' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
-    "access_token": "2cb68a524c25b9a934e9edf4102ef82db5babd77"
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
 }
 ```
 
@@ -109,7 +139,17 @@ Exemplo de retorno:
 
 ###  Marcas de Motos Disponíveis
 
-Exemplo de chamada para https://apps.olx.com.br/autoupload/moto_info:
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/moto_info:
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/moto_info' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
@@ -137,11 +177,21 @@ Exemplo de retorno:
 
 ### Modelos de Motos de Determinada Marca
 
-Exemplo de chamada: https://apps.olx.com.br/autoupload/moto_info/7 (no caso, o id `7` é a marca `YAMAHA`, conforme visto no exemplo acima):
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/moto_info/7 (no caso, o id `7` é a marca `YAMAHA`, conforme visto no exemplo acima):
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/moto_info/7' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
-    "access_token": "2cb68a524c25b9a934e9edf4102ef82db5babd77"
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
 }
 ```
 
@@ -164,11 +214,21 @@ Exemplo de retorno:
 
 ### Versões de Modelo de Moto de Marca Determinada
 
-Exemplo de chamada para: https://apps.olx.com.br/autoupload/moto_info/7/6 (no caso, o id `7` identifica a marca `YAMAHA` e o id `6` identifica o modelo `FAZER`, conforme exemplos acima):
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/moto_info/7/6 (no caso, o id `7` identifica a marca `YAMAHA` e o id `6` identifica o modelo `FAZER`, conforme exemplos acima):
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/moto_info/7/6' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
-    "access_token": "2cb68a524c25b9a934e9edf4102ef82db5babd77"
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
 }
 ```
 
@@ -185,11 +245,21 @@ Exemplo de retorno:
 
 ### Cilindradas Disponíveis para Motos
 
-Exemplo de chamada para: https://apps.olx.com.br/autoupload/moto_cubiccms_info
+Exemplo de chamada: `POST` https://apps.olx.com.br/autoupload/moto_cubiccms_info
+
+Utilizando o cURL:
+
+```bash
+$ curl -A Mozila -L -X POST 'https://apps.olx.com.br/autoupload/moto_cubiccms_info' -H 'Content-Type: application/json' --data-raw '{
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
+}'
+```
+
+Utilizando postman/insomnia:
 
 ```json
 {
-    "access_token": "2cb68a524c25b9a934e9edf4102ef82db5babd77"
+    "access_token": "ca18abccaadd282490e75173f98b8ec6f0c1c6c8"
 }
 ```
 
