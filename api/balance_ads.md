@@ -70,9 +70,11 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
-        "performed": 0,
-        "available": 20,
-        "total": 20,
+        "ads": {
+            "performed": 0,
+            "available": 20,
+            "total": 20
+        },
         "last_renew_date": "2022-06-30T16:36:32.069324",
         "next_renew_date": "2022-07-29T16:36:32.069324"
     }
@@ -96,9 +98,11 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     {
         "id": "cc07f89f5f9b691a4bc24d98614e54df",
         "name": "Plano Profissional - Carros 20",
-        "performed": 5,
-        "available": 15,
-        "total": 20,
+        "ads": {
+            "performed": 5,
+            "available": 15,
+            "total": 20
+        },
         "last_renew_date": "2022-06-30T16:36:32.069324",
         "next_renew_date": "2022-07-29T16:36:32.069324"
     }
