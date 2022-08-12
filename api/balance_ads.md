@@ -19,9 +19,18 @@ Se o anunciante possui um plano profissional ativo, a consulta retorna um `statu
 | `id` | `string` | sim | Identificador único do plano profissinal | 
 | `name` | `string` | sim | Descrição do plano profissional | 
 | `ads` | [**balance**](#balance) | sim | Estrutura contendo quantidade de inserções do cliente, saldo do cliente e limite de inserções do plano |
+| `bumps` | [**bumps**](#bumps) | sim | Estrutura contendo quantidade de bumps contratatos pelo cliente, saldo e limite do plano e a avulso |
 | `last_renew_date` | `string (ISO Datetime)` | sim | Data da última renovação de saldo de anúncios. <br><br>*Observe que esta data e hora estão no Zulu Time Zone. Para horário de Brasília, decremente três horas.* |
 | `next_renew_date` | `string (ISO Datetime)` | sim | Data da próxima renovação de saldo de anúncios. <br><br>*Observe que esta data e hora estão no Zulu Time Zone. Para horário de Brasília, decremente três horas.* |
 </br>
+
+### *bumps*
+
+| Parâmetro | Valores | Obrigatório | Descrição  |
+|-----------|---------|-------------|------------|
+| `plan` | [**balance**](#balance) | sim | saldo de bumps de ads contratados pelo plano PRO |
+| `additional` | [**balance**](#balance) | sim | saldo de bumps de ads contratados pelo plano de forma avulsa |
+
 
 ### *balance*
 
@@ -52,7 +61,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 </br>
 
 > Para um plano com limite de 20 inserções de anúncios no qual nenhum anúncio foi inserido:
-> Saldos de bumps contratatos pelo plnao e avulso.
+> Saldos de bumps contratatos pelo plano e avulso.
 
 
 * Request 
