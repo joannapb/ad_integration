@@ -52,6 +52,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 </br>
 
 > Para um plano com limite de 20 inserções de anúncios no qual nenhum anúncio foi inserido:
+> Saldos de bumps contratatos pelo plnao e avulso.
+
 
 * Request 
 
@@ -72,8 +74,20 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
         "name": "Plano Profissional - Carros 20",
         "ads": {
             "performed": 0,
-            "available": 20,
+            "available": 15,
             "total": 20
+        },
+        "bumps": {
+            "plan": {
+                "performed": 2,
+                "available": 3,
+                "total": 5,
+            },
+            "additional": {
+                "performed": 2,
+                "available": 3,
+                "total": 5,
+            }
         },
         "last_renew_date": "2022-06-30T16:36:32.069324",
         "next_renew_date": "2022-07-29T16:36:32.069324"
