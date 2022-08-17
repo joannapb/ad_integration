@@ -1,9 +1,14 @@
 # Aplicando destaques aos anúncios
 
-Com o passar do tempo, um anúncio publicado no portal descerá algumas posições. Para que o anúncio volte ao topo novamente, oferecemos os **destaques** que são benefícios para que o anúncio ganhe mais visibilidade na OLX. Dentre eles, oferecemos os **Destaques Pro** exclusivamente para que os clientes profissionais possam evidenciar seus anúncio de forma com que eles voltarão aos primeiros resultados como se fosse um anúncio novo.
+Com o passar do tempo, um anúncio publicado no portal descerá algumas posições, seguindo-se uma ordenação natural de inserções. Para que o anúncio volte ao topo novamente, oferecemos os **destaques** que são benefícios para que o anúncio ganhe mais visibilidade na OLX. Dentre eles, oferecemos os **Destaques Pro** exclusivamente para que os clientes profissionais possam evidenciar seus anúncio de forma com que eles voltarão aos primeiros resultados como se fosse um anúncio novo.
 
 ---
-## Requisição para aplicar destaque ao anúncio
+## Consulta dos anúncio em destaque
+
+Em breve. 
+
+---
+## Aplicação de destaque em anúncio
 
 A URL usada para fazer a requisição do arquivo JSON é https://apps.olx.com.br/autoupload/bump/ad/{ad_id}, método `PUT`. Essa requisição deve conter o `token` de cada anunciante no header como: `Authorization: Bearer <token>`.
 
@@ -27,7 +32,7 @@ Se o anunciante possui um plano profissional ativo e o destaque for aplicado, a 
 
 ## Retorno de erro esperado
 
-Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a consulta retorna um `status code > 200` e um JSON com o motivo e a mensagem do erro.
+Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a consulta retorna um `status code > 400` e um JSON com o motivo e a mensagem do erro.
 </br>
 
 ## Códigos e motivos de erros da requisição retornados
@@ -38,6 +43,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 | <p align="center">`401`</p> | Token inválido | ACCESS_DENIED | Check the client authentication token |
 | <p align="center">`403`</p> | Cliente não tem saldo disponível para aplicar o destaque | FORBIDDEN | `{ "reason": "FORBIDDEN", "message": "Forbidden." }` |
 | <p align="center">`404`</p> | Anúncio não encontrado | NOT FOUND | `{ "reason": "NOT_FOUND", "message": "Ad not found." }` |
+| <p align="center">`422`</p> | Bump já aplicado | BUMP_ALREADY_APPLIED_OR_NOT_SYNCHRONIZED | `{ "reason": "BUMP_ALREADY_APPLIED_OR_NOT_SYNCHRONIZED", "message": "Bump already applied or Ad not synchronized." }` |
 | <p align="center">`429`</p> | Rate Limit configurado quando o cliente fazer mais requisições por segundo do que deveria | RATE_LIMIT | You have exceeded the X requests in X seconds limit! |
 | <p align="center">`500`</p> | Erro interno inesperado | UNEXPECTED_INTERNAL_ERROR | Unexpected internal error. Try again later |
 </br>
@@ -63,7 +69,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     Pragma: no-cache
 
     {
-        "next_bumps": ["2020-09-01 00:00:00.00000", "2020-09-01 00:00:00.00000"]
+        "next_bumps": ["2020-09-01 00:00:00.00000", "2020-09-05 00:00:00.00000"]
     }
     ```
 ---
@@ -77,7 +83,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 * Response
 
     ```json
-    HTTP/1.1 200 OK
+    HTTP/1.1 404
     Content-Type: application/json;charset=UTF-8
     Cache-Control: no-store
     Pragma: no-cache
@@ -119,13 +125,13 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 * Reponse
 
     ```json
-    HTTP/1.1 410
+    HTTP/1.1 422
     Content-Type: application/json;charset=UTF-8
     Cache-Control: no-store
     Pragma: no-cache
 
-    {
-        "reason": "NOT_FOUND",
-        "message": "Ad not found."
+    { 
+        "reason": "BUMP_ALREADY_APPLIED_OR_NOT_SYNCHRONIZED", 
+        "message": "Bump already applied or Ad not synchronized." 
     }
     ```
