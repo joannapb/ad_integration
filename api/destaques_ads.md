@@ -1,45 +1,29 @@
-# Consulta Saldos e Limites de Anúncios
+# Aplicando destaques aos anúncios
 
-A medida que os anúncios são publicados, o limite disponível em seu plano contratado é consumido. A API abaixo disponibiliza informações para acompanhamento do limite de inserção de um plano, a quantidade de inserções que já foram realizadas, o saldo disponível para inserções de novos anúncios, a data da última renovação do plano e a data que a próxima renovação do plano ocorrerá.
+Com o passar do tempo, um anúncio publicado no portal descerá algumas posições. Para que o anúncio volte ao topo novamente, oferecemos os **destaques** que são benefícios para que o anúncio ganhe mais visibilidade na OLX. Dentre eles, oferecemos os **Destaques Pro** exclusivamente para que os clientes profissionais possam evidenciar seus anúncio de forma com que eles voltarão aos primeiros resultados como se fosse um anúncio novo.
 
 ---
-## Requisição de consulta de saldo e limite
+## Requisição para aplicar destaque ao anúncio
 
-A URL usada para fazer a requisição do arquivo JSON é https://apps.olx.com.br/autoupload/balance, método `GET`. Essa requisição deve conter o `access_token` de cada anunciante no header como: `Authorization: Bearer <access_token>`.
+A URL usada para fazer a requisição do arquivo JSON é https://apps.olx.com.br/autoupload/bump/ad/{ad_id}, método `PUT`. Essa requisição deve conter o `token` de cada anunciante no header como: `Authorization: Bearer <token>`.
 
 > O campo `access_token` pode ser obtido seguindo a documentação [Autenticação na API olx.com.br](oauth.md).
 
-
-## Retorno de sucesso esperado 
-
-Se o anunciante possui um plano profissional ativo, a consulta retorna um `status code 200` e um JSON no corpo da resposta com a estrutura: 
-
 | Parâmetro | Valores | Obrigatório | Descrição  |
 |-----------|---------|-------------|------------|
-| `id` | `string` | sim | Identificador único do plano profissinal | 
-| `name` | `string` | sim | Descrição do plano profissional | 
-| `ads` | [**balance**](#balance) | sim | Estrutura contendo quantidade de inserções do cliente, saldo do cliente e limite de inserções do plano |
-| `bumps` | [**bumps**](#bumps) | sim | Estrutura contendo quantidade de bumps contratatos pelo cliente, saldo e limite do plano e a avulso |
-| `last_renew_date` | `string (ISO Datetime)` | sim | Data da última renovação de saldo de anúncios. <br><br>*Observe que esta data e hora estão no Zulu Time Zone. Para horário de Brasília, decremente três horas.* |
-| `next_renew_date` | `string (ISO Datetime)` | sim | Data da próxima renovação de saldo de anúncios. <br><br>*Observe que esta data e hora estão no Zulu Time Zone. Para horário de Brasília, decremente três horas.* |
+| `ad_id` | `string` | sim | Para importação via JSON, o identificador é o parâmetro id existente em cada anúncio. | 
+| `token` | `string` | sim | N/A | 
+
 </br>
 
-### *bumps*
+Se o anunciante possui um plano profissional ativo e o destaque for aplicado, a requisição retorna um `status code 200` e um JSON no corpo da resposta com a estrutura: 
+## Retorno de sucesso esperado 
 
 | Parâmetro | Valores | Obrigatório | Descrição  |
 |-----------|---------|-------------|------------|
-| `plan` | [**balance**](#balance) | sim | saldo de bumps de ads contratados pelo plano PRO |
-| `additional` | [**balance**](#balance) | sim | saldo de bumps de ads contratados pelo plano de forma avulsa |
+| `next_bumps` | `arrayOf[string (ISO Datetime)]` | sim | Próximas datas agendadas para a volta do anúncio ao topo (ou seja, para a reaplicação do destaque). | 
 
-
-### *balance*
-
-| Parâmetro | Valores | Obrigatório | Descrição  |
-|-----------|---------|-------------|------------|
-| `performed` | `integer` | sim | Inserções já realizadas |
-| `available` | `integer` | sim | Saldo disponível para uso |
-| `total` | `integer` | sim | Limite contratado pelo cliente |
-
+</br>
 
 ## Retorno de erro esperado
 
@@ -52,7 +36,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 |--------|-----------|----------------|----------|
 | <p align="center">`400`</p> | Falta campo de `authorization` no header da requisição | BAD_REQUEST | Check the header field(s) |
 | <p align="center">`401`</p> | Token inválido | ACCESS_DENIED | Check the client authentication token |
-| <p align="center">`410`</p> | Cliente não possui planos com limites | PRODUCT_NOT_FOUND_BY_ACCOUNT | Plan does not control limits |
+| <p align="center">`403`</p> | Cliente não tem saldo disponível para aplicar o destaque | FORBIDDEN | `{ "reason": "FORBIDDEN", "message": "Forbidden." }` |
+| <p align="center">`404`</p> | Anúncio não encontrado | NOT FOUND | `{ "reason": "NOT_FOUND", "message": "Ad not found." }` |
 | <p align="center">`429`</p> | Rate Limit configurado quando o cliente fazer mais requisições por segundo do que deveria | RATE_LIMIT | You have exceeded the X requests in X seconds limit! |
 | <p align="center">`500`</p> | Erro interno inesperado | UNEXPECTED_INTERNAL_ERROR | Unexpected internal error. Try again later |
 </br>
@@ -60,14 +45,13 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ## Exemplos de retorno
 </br>
 
-> Para um plano com limite de 20 inserções de anúncios no qual nenhum anúncio foi inserido:
-> Saldos de bumps contratatos pelo plano e avulso.
+> Ao aplicar o destaque datas agendadas para a volta do anúncio ao topo (ou seja, para a reaplicação do destaque)
 
 
 * Request 
 
     ```sh
-    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -X PUT "https://apps.olx.com.br/autoupload/bump/ad/{ad_id}" -H "accept: application/json" -H "Content-Type: application/json" -H "authorization: Bearer {token}"
     ```
 
 * Response
@@ -79,35 +63,15 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     Pragma: no-cache
 
     {
-        "id": "cc07f89f5f9b691a4bc24d98614e54df",
-        "name": "Plano Profissional - Carros 20",
-        "ads": {
-            "performed": 0,
-            "available": 15,
-            "total": 20
-        },
-        "bumps": {
-            "plan": {
-                "performed": 2,
-                "available": 3,
-                "total": 5,
-            },
-            "additional": {
-                "performed": 2,
-                "available": 3,
-                "total": 5,
-            }
-        },
-        "last_renew_date": "2022-06-30T16:36:32.069324",
-        "next_renew_date": "2022-07-29T16:36:32.069324"
+        "next_bumps": ["2020-09-01 00:00:00.00000", "2020-09-01 00:00:00.00000"]
     }
     ```
 ---
-> Para um plano com limite de 20 inserções de anúncios no qual 5 anúncios foram inseridos:
+> Em caso de erro
 
 * Request
     ```sh
-    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -X PUT "https://apps.olx.com.br/autoupload/bump/ad/{ad_id}" -H "accept: application/json" -H "Content-Type: application/json" -H "authorization: Bearer {token}"
     ```
 
 * Response
@@ -119,15 +83,8 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     Pragma: no-cache
 
     {
-        "id": "cc07f89f5f9b691a4bc24d98614e54df",
-        "name": "Plano Profissional - Carros 20",
-        "ads": {
-            "performed": 5,
-            "available": 15,
-            "total": 20
-        },
-        "last_renew_date": "2022-06-30T16:36:32.069324",
-        "next_renew_date": "2022-07-29T16:36:32.069324"
+        "reason": "NOT_FOUND",
+        "message": "Ad not found."
     }
     ```
 ---
@@ -152,11 +109,11 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     }
     ```
 ---
-> Para um anunciante que não possui plano profissional ativo:
+> Para o anúncio que já foi dado destaque:
 
 * Request
     ```sh
-    curl -A Mozila -H "Authorization: Bearer <access_token>" "https://apps.olx.com.br/autoupload/balance"
+    curl -X PUT "https://apps.olx.com.br/autoupload/bump/ad/{ad_id}" -H "accept: application/json" -H "Content-Type: application/json" -H "authorization: Bearer {token}"
     ```
 
 * Reponse
@@ -168,7 +125,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     Pragma: no-cache
 
     {
-        "reason": "PRODUCT_NOT_FOUND_BY_ACCOUNT", 
-        "message": "Plan does not control limits."
+        "reason": "NOT_FOUND",
+        "message": "Ad not found."
     }
     ```
