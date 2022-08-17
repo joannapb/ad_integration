@@ -16,7 +16,7 @@ A URL usada para fazer a requisição do arquivo JSON é https://apps.olx.com.
 
 | Parâmetro | Valores | Obrigatório | Descrição  |
 |-----------|---------|-------------|------------|
-| `ad_id` | `string` | sim | Para importação via JSON, o identificador é o parâmetro id existente em cada anúncio. | 
+| `ad_id` | `string` | sim | Identificador do anúncio. | 
 | `token` | `string` | sim | N/A | 
 
 </br>
@@ -51,7 +51,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ## Exemplos de retorno
 </br>
 
-> Ao aplicar o destaque datas agendadas para a volta do anúncio ao topo (ou seja, para a reaplicação do destaque)
+> Ao aplicar destaque, o anúncio terá sua visibilidade aumentada indo para o topo da listagem de anúncios e retornaremos uma lista de datas futuras onde o destaque será novamente aplicado no período de 7 dias.
 
 
 * Request 
@@ -69,7 +69,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     Pragma: no-cache
 
     {
-        "next_bumps": ["2020-09-01 00:00:00.00000", "2020-09-05 00:00:00.00000"]
+        "next_bumps": ["2022-09-01 00:00:00.00000", "2022-09-05 00:00:00.00000"]
     }
     ```
 ---
@@ -116,6 +116,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
     ```
 ---
 > Para o anúncio que já foi dado destaque:
+*Obs: Uma vez o destaque aplicado e ativo, só será permitida a re-aplicação de novo destaque no anúncio após o prazo de 7 dias.*
 
 * Request
     ```sh
