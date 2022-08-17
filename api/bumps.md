@@ -1,4 +1,4 @@
-# Aplicando destaques aos anúncios
+# Destaques
 
 Com o passar do tempo, um anúncio publicado no portal descerá algumas posições, seguindo-se uma ordenação natural de inserções. Para que o anúncio volte ao topo novamente, oferecemos os **destaques** que são benefícios para que o anúncio ganhe mais visibilidade na OLX. Dentre eles, oferecemos os **Destaques Pro** exclusivamente para que os clientes profissionais possam evidenciar seus anúncio de forma com que eles voltarão aos primeiros resultados como se fosse um anúncio novo.
 
