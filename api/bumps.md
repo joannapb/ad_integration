@@ -117,7 +117,7 @@ Caso ocorra algum erro ou o anunciante não possua plano profissional ativo, a c
 ---
 > Para o anúncio que já foi dado destaque:
 
-*Obs: Uma vez o destaque aplicado e ativo, só será permitida a re-aplicação de novo destaque no anúncio após o prazo de 7 dias.*
+* Obs: Uma vez o destaque aplicado e ativo, só será permitida a re-aplicação de novo destaque no anúncio após o prazo de 7 dias.*
 
 * Request
     ```sh
